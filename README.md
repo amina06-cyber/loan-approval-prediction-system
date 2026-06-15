@@ -1,128 +1,71 @@
 # Loan Approval Prediction System
 
-A machine learning project that predicts whether a loan application is likely to be approved based on applicant demographics, financial information, credit history, and loan characteristics.
+A machine learning project that predicts whether a loan application is likely to be approved, based on factors like income, credit history, education, and employment status. Built with Python and Scikit-learn, and deployed as an interactive app on Hugging Face.
 
-## Why I Built This Project
+## Try it out
 
-Loan approval decisions depend on multiple factors, and it is often difficult to understand how these factors interact. I wanted to explore how machine learning models can learn these patterns from historical loan data and provide approval predictions for new applicants.
+[Live demo on Hugging Face](https://huggingface.co/spaces/aminano/loan-approval-predictor)
 
-This project walks through the complete machine learning pipeline, from data preprocessing and model training to deployment through an interactive web application.
+## Why this project
 
-## Project Goal
+Loan approval decisions depend on multiple factors, and it's often hard to see how these factors interact with each other. I wanted to explore how machine learning models can learn these patterns from historical loan data and use them to predict approvals for new applicants.
 
-To build and deploy a classification model capable of predicting loan approval status using applicant information.
+This project walks through the complete pipeline - from data preprocessing and model training to deployment as an interactive web app.
+
+## What it does
+
+You enter applicant details (income, credit history, loan amount, education, etc.) and the app shows:
+
+- Whether the loan is likely to be **approved** or **not approved**, with a probability gauge
+- A confidence interval around that prediction
+- Suggested next steps depending on the result
+- A downloadable CSV report of the result
+
+## How it works
+
+1. **Data cleaning** - dropped the Loan_ID column, filled missing categorical values with the mode and missing numerical values with the mean
+2. **EDA** - looked at how loan status relates to credit history, education, property area, income, and number of dependents
+3. **Encoding** - label-encoded categorical variables so the models could use them
+4. **Model comparison** - trained and compared Random Forest, Logistic Regression, Decision Tree, and Gradient Boosting Classifiers using accuracy and 5-fold cross-validation
+5. **Final model** - went with Random Forest (see below for why), saved it as a pickle file, and wrapped it in a Gradio app deployed on Hugging Face
+
+The full process is in [`Loan_Approval_Pred_system.ipynb`](#) - link this to your Colab notebook or export it into the repo.
 
 ## Dataset
 
-Source: Kaggle Loan Prediction Dataset
+[Loan Prediction Problem Dataset](https://www.kaggle.com/datasets/altruistdelhite04/loan-prediction-problem-dataset) from Kaggle - 614 rows covering applicant gender, marital status, dependents, education, employment status, applicant and co-applicant income, loan amount, loan term, credit history, and property area. The target is loan status (approved / not approved).
 
-The dataset includes:
+## Model performance & why Random Forest
 
-* Gender
-* Marital Status
-* Number of Dependents
-* Education Level
-* Self Employment Status
-* Applicant Income
-* Co-applicant Income
-* Loan Amount
-* Loan Term
-* Credit History
-* Property Area
+I compared four models - Random Forest, Logistic Regression, Decision Tree, and Gradient Boosting - using accuracy and 5-fold cross-validation.
 
-Target Variable:
+Random Forest came out on top:
 
-* Loan Status (Approved / Not Approved)
+- **Accuracy:** ~77%
+- **Cross-validation score:** ~81%
 
-## Methodology
+Logistic Regression was close behind (~78% accuracy), but Random Forest handled feature interactions better and was less sensitive to noise. 77% isn't a huge number, and the dataset's size, missing values, and class imbalance are part of why - but the goal here was an interpretable, complete pipeline rather than squeezing out the last percentage point.
 
-The project followed the following workflow:
+## Tech stack
 
-1. Data Cleaning and Preprocessing
-2. Exploratory Data Analysis (EDA)
-3. Categorical Variable Encoding
-4. Model Training
-5. Model Comparison
-6. Model Evaluation
-7. Deployment using Gradio
+- Python, Pandas, NumPy
+- Scikit-learn
+- Seaborn / Matplotlib (for EDA)
+- Gradio
+- Hugging Face Spaces
+- Google Colab
 
-## Models Evaluated
+## What I'd add next
 
-* Logistic Regression
-* Decision Tree Classifier
-* Random Forest Classifier
+- SHAP values to explain individual predictions
+- Address the class imbalance to push accuracy higher
+- Try other models like XGBoost or LightGBM
 
-## Final Model
+## A note on this project
 
-Random Forest Classifier
+This was built for learning and as part of my portfolio - it's not meant to be used for real lending decisions.
 
-Accuracy: 77%
-
-Although the accuracy is moderate, Random Forest produced the most reliable overall performance among the models tested and captured nonlinear relationships within the dataset more effectively than Logistic Regression.
-
-## Key Insight
-
-Credit History emerged as the strongest predictor of loan approval.
-
-Applicants with a positive credit history consistently showed a much higher likelihood of approval than applicants without one.
-
-Other important factors included:
-
-* Applicant Income
-* Loan Amount
-* Property Area
-* Co-applicant Income
-
-## Deployment
-
-The model was deployed using:
-
-* Gradio
-* Hugging Face Spaces
-
-The web application allows users to:
-
-* Enter applicant information
-* Receive a loan approval prediction
-* View approval probability
-* Download a prediction report
-
-## Repository Structure
-
-loan-approval-predictor/
-
-├── data/
-
-├── notebooks/
-
-├── model/
-
-├── app/
-
-├── images/
-
-├── requirements.txt
-
-└── README.md
-
-## Tools Used
-
-* Python
-* Pandas
-* NumPy
-* Scikit-learn
-* Gradio
-* Google Colab
-* Hugging Face Spaces
-
-## Future Improvements
-
-* Hyperparameter tuning
-* Explainable AI using SHAP values
-* Additional feature engineering
-* Deployment using Flask or FastAPI
-* Testing on larger financial datasets
-
-## Author
+## About me
 
 Amina Ashfaq
+Economics with Data Science, Information Technology University (ITU), Lahore
