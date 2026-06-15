@@ -6,9 +6,7 @@ Built using Python, Scikit-learn, and Gradio as part of my machine learning port
 
 ## Project Demo
 
-🎥 Watch the application in action:
-
-https://drive.google.com/file/d/1JcCvrzMgvdpM5tg5RCEwCn_VRIr98L1f/view?usp=sharing
+[Watch Demo Video](https://drive.google.com/file/d/1JcCvrzMgvdpM5tg5RCEwCn_VRIr98L1f/view?usp=sharing)
 
 ## Why I Built This Project
 
@@ -37,8 +35,8 @@ The application then provides:
 
 
 ### Prediction Result
+<img width="1870" height="871" alt="image" src="https://github.com/user-attachments/assets/9a65feb6-4909-4543-96e6-16759f54b645" />
 
-<img width="1842" height="909" alt="image" src="https://github.com/user-attachments/assets/e4ad60e3-d18e-4139-a2a2-17e99e4ab9a6" />
 
 
 ## How It Works
